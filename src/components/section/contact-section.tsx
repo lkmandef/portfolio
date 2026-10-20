@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FlickeringGrid } from "@/components/magicui/flickering-grid";
 import { DATA } from "@/data/resume";
+import { Mail, Linkedin } from "lucide-react";
 
 export default function ContactSection() {
   return (
@@ -24,20 +25,28 @@ export default function ContactSection() {
           Get in Touch
         </h2>
         <p className="mx-auto max-w-lg text-muted-foreground text-balance">
-          Want to chat? Just shoot me a dm{" "}
+          Want to discuss an opportunity, collaborate on a project, or just say
+          hi? Feel free to send an email or connect with me on LinkedIn.
+        </p>
+        <div className="flex flex-wrap items-center justify-center gap-3 mt-2">
           <Link
-            href={DATA.contact.social.X.url}
+            href={`mailto:${DATA.contact.email}`}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground font-medium text-sm shadow hover:bg-primary/90 transition-colors"
+          >
+            <Mail className="size-4" />
+            Send Email
+          </Link>
+          <Link
+            href={DATA.contact.social.LinkedIn.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-500 hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-border bg-background hover:bg-muted font-medium text-sm transition-colors"
           >
-            with a direct question on twitter
-          </Link>{" "}
-          and I&apos;ll respond whenever I can. I will ignore all
-          soliciting.
-        </p>
+            <Linkedin className="size-4" />
+            LinkedIn
+          </Link>
+        </div>
       </div>
     </div>
   );
 }
-

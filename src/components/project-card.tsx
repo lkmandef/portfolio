@@ -12,14 +12,14 @@ function ProjectImage({ src, alt }: { src: string; alt: string }) {
   const [imageError, setImageError] = useState(false);
 
   if (!src || imageError) {
-    return <div className="w-full h-48 bg-muted" />;
+    return <div className="w-full aspect-video bg-muted" />;
   }
 
   return (
     <img
       src={src}
       alt={alt}
-      className="w-full h-48 object-cover"
+      className="w-full aspect-video object-cover object-top"
       onError={() => setImageError(true)}
     />
   );
@@ -75,12 +75,17 @@ export function ProjectCard({
               loop
               muted
               playsInline
-              className="w-full h-48 object-cover"
+              className="w-full aspect-video object-cover object-top"
             />
           ) : image ? (
             <ProjectImage src={image} alt={title} />
           ) : (
-            <div className="w-full h-48 bg-muted" />
+            <div className="w-full aspect-video bg-linear-to-br from-muted/70 via-muted/40 to-muted/80 flex flex-col items-center justify-center gap-2 border-b border-border/50 select-none">
+              <span className="text-2xl font-bold tracking-wider text-muted-foreground/40 font-mono uppercase">
+                {title.split(" ")[0]}
+              </span>
+              <span className="text-xs text-muted-foreground/50 font-medium">Project Showcase</span>
+            </div>
           )}
         </Link>
         {links && links.length > 0 && (
