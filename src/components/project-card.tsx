@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Markdown from "react-markdown";
 
 function ProjectImage({ src, alt }: { src: string; alt: string }) {
@@ -19,6 +19,10 @@ function ProjectImage({ src, alt }: { src: string; alt: string }) {
     <img
       src={src}
       alt={alt}
+      width={1366}
+      height={768}
+      loading="lazy"
+      decoding="async"
       className="w-full aspect-video object-cover object-top"
       onError={() => setImageError(true)}
     />
@@ -54,6 +58,30 @@ export function ProjectCard({
   links,
   className,
 }: Props) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const videoEl = videoRef.current;
+    if (!videoEl) return;
+
+    // Play video automatically when within or approaching viewport, pause when offscreen
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            videoEl.play().catch(() => {});
+          } else {
+            videoEl.pause();
+          }
+        });
+      },
+      { rootMargin: "200px" }
+    );
+
+    observer.observe(videoEl);
+    return () => observer.disconnect();
+  }, [video]);
+
   return (
     <div
       className={cn(
@@ -70,13 +98,19 @@ export function ProjectCard({
         >
           {video ? (
             <video
-              src={video}
-              autoPlay
+              ref={videoRef}
               loop
               muted
               playsInline
+              preload="metadata"
+              width={1366}
+              height={768}
               className="w-full aspect-video object-cover object-top"
-            />
+              aria-label={`${title} preview video`}
+            >
+              <source src={video} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           ) : image ? (
             <ProjectImage src={image} alt={title} />
           ) : (
