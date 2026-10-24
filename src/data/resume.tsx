@@ -181,7 +181,7 @@ export const DATA = {
         },
       ],
       image: "",
-      video: "/type.mp4",
+      video: "/type-optimized.mp4",
     },
   ] as readonly PlaygroundProject[],
 } as const;
