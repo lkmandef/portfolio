@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import ContactSection from "@/components/section/contact-section";
-import HackathonsSection from "@/components/section/hackathons-section";
+import PlaygroundSection from "@/components/section/playground-section";
 import ProjectsSection from "@/components/section/projects-section";
 import WorkSection from "@/components/section/work-section";
 import { ArrowUpRight } from "lucide-react";
@@ -147,9 +147,9 @@ export default function Page() {
           <ProjectsSection />
         </BlurFade>
       </section>
-      <section id="hackathons">
+      <section id="playground">
         <BlurFade delay={BLUR_FADE_DELAY * 13}>
-          <HackathonsSection />
+          <PlaygroundSection />
         </BlurFade>
       </section>
       <section id="contact">

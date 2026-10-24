@@ -22,18 +22,20 @@ export type Skill = {
   icon?: ComponentType<{ className?: string }>;
 };
 
-export type Hackathon = {
+export type PlaygroundProject = {
   title: string;
-  dates: string;
-  location: string;
   description: string;
+  dates: string;
+  technologies?: readonly string[];
   image?: string;
-  mlh?: string;
+  video?: string;
   links?: readonly {
-    title: string;
     icon: React.ReactNode;
+    type: string;
     href: string;
   }[];
+  href?: string;
+  active?: boolean;
 };
 
 export const DATA = {
@@ -162,16 +164,24 @@ export const DATA = {
       video: "/hafis.mp4",
     },
   ],
-  hackathons: [
+  playground: [
     {
-      title: "Tech Innovation & Development Showcase",
+      title: "Type Ossuary",
+      href: "https://type-ossuary.vercel.app/",
       dates: "2026",
-      location: "Banjarmasin, Indonesia",
+      active: true,
       description:
-        "Building practical full-stack prototypes, exploring modern web technologies, and developing digital systems for operational efficiency.",
+        "**Type Ossuary**: a resting place for words. Sweep a flashlight through the dark, type, and watch your text creep when left alone, rot when erased, and be buried for good with a single press of Enter.",
+      technologies: [],
+      links: [
+        {
+          type: "Website",
+          href: "https://type-ossuary.vercel.app/",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
       image: "",
-      mlh: "",
-      links: [],
+      video: "/type.mp4",
     },
-  ] as readonly Hackathon[],
+  ] as readonly PlaygroundProject[],
 } as const;
